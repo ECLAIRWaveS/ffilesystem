@@ -22,7 +22,7 @@ auto make_ctx() {
 
   if (ffilesystem::is_windows) {
     ctx.base = "j:\\foo";
-    if (const auto d = ffilesystem::getenv("SystemDrive")) {
+    if (const auto d = ffilesystem::get_env("SystemDrive")) {
       expect(d.has_value() >> fatal);
       ctx.sys_drive = d.value();
     }

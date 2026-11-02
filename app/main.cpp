@@ -160,12 +160,12 @@ bool one_arg(std::string_view fun, std::string_view a1)
     {"short", [](std::string_view a1) { return ffilesystem::shortname(a1); }},
     {"touch", [](std::string_view a1) { return "touch " + std::string(a1) + " " + std::to_string(ffilesystem::touch(a1)); }},
     {"set_modtime", [](std::string_view a1) { return ffilesystem::set_modtime(a1); }},
-    {"getenv", [](std::string_view a1) { auto e = ffilesystem::getenv(a1);
+    {"getenv", [](std::string_view a1) { auto e = ffilesystem::get_env(a1);
       if (e){ return *e; };
       std::cerr << a1 << " environment variable not set\n";
       return std::string{};
     }},
-    {"setenv", [](std::string_view a1) { std::cout << "unset " << a1 << "\n"; return ffilesystem::setenv(a1, ""); }},
+    {"setenv", [](std::string_view a1) { std::cout << "unset " << a1 << "\n"; return ffilesystem::set_env(a1, ""); }},
     {"realpath", [](std::string_view a1) { return ffilesystem::real_path(a1); }},
     {"as_posix", [](std::string_view a1) { std::string s(a1); ffilesystem::as_posix(s); return s; }},
     {"as_windows", [](std::string_view a1) { std::string s(a1); ffilesystem::as_windows(s); return s; }},
@@ -319,7 +319,7 @@ bool two_arg(std::string_view fun, std::string_view a1, std::string_view a2)
     {"is_subdir", [](std::string_view a1, std::string_view a2) { return ffilesystem::is_subdir(a1, a2); }},
     {"relative", [](std::string_view a1, std::string_view a2) { return ffilesystem::relative_to(a1, a2); }},
     {"proximate", [](std::string_view a1, std::string_view a2) { return ffilesystem::proximate_to(a1, a2); }},
-    {"setenv", [](std::string_view a1, std::string_view a2) { return ffilesystem::setenv(a1, a2); }},
+    {"setenv", [](std::string_view a1, std::string_view a2) { return ffilesystem::set_env(a1, a2); }},
     {"copy", [](std::string_view a1, std::string_view a2) { return ffilesystem::copy_file(a1, a2, false); }},
     {"create_symlink", [](std::string_view a1, std::string_view a2) { return ffilesystem::create_symlink(a1, a2); }},
     {"absolute", [](std::string_view a1, std::string_view a2) { return ffilesystem::absolute(a1, a2); }},

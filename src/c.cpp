@@ -126,10 +126,10 @@ size_t fs_get_shell(char* name, const size_t buffer_size) { return fs_str2char(f
 
 size_t fs_getenv(const char* name, char* value, const size_t buffer_size)
 {
-  return fs_str2char(ffilesystem::getenv(name).value_or(""), value, buffer_size);
+  return fs_str2char(ffilesystem::get_env(name).value_or(""), value, buffer_size);
 }
 
-bool fs_setenv(const char* name, const char* value){ return ffilesystem::setenv(name, value); }
+bool fs_setenv(const char* name, const char* value){ return ffilesystem::set_env(name, value); }
 
 size_t fs_get_homedir(char* path, const size_t buffer_size)
 {

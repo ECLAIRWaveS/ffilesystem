@@ -53,7 +53,7 @@ std::string get_tempdir()
 #endif
 
 #if !defined(_WIN32)
-  auto t = getenv("TMPDIR");
+  auto t = get_env("TMPDIR");
   std::string tempdir{t.value_or("/tmp")};
 
   if (is_directory(tempdir))

@@ -44,7 +44,7 @@ int main() {
       };
 
   if (ffilesystem::is_windows) {
-    auto drive = ffilesystem::getenv("SYSTEMDRIVE");
+    auto drive = ffilesystem::get_env("SYSTEMDRIVE");
     expect(drive.has_value() >> fatal) << "Failed to get SYSTEMDRIVE environment variable";
     const std::string c = drive.value();
 

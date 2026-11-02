@@ -54,43 +54,43 @@ int main() {
     std::string_view nonnull_name(in_name.data(), name.size());
     expect(nonnull_name.back() != '\0') << "Environment variable name should not be null-terminated in test";
 
-    auto h = ffilesystem::getenv(ffilesystem::is_windows ? "USERPROFILE" : "HOME");
+    auto h = ffilesystem::get_env(ffilesystem::is_windows ? "USERPROFILE" : "HOME");
     expect(h.has_value() >> fatal) << "Environment variable HOME or USERPROFILE should be set";
 
-    h = ffilesystem::getenv(nonnull_name);
+    h = ffilesystem::get_env(nonnull_name);
     expect(h.has_value()) << "Environment variable " << nonnull_name << " should be set in test";
   };
 
   "setenv"_test = [] {
     const std::string k = "FORTtest";
     const std::string v = "FORTvalue";
-    ffilesystem::setenv(k, v);
+    ffilesystem::set_env(k, v);
 
-    auto e = ffilesystem::getenv(k);
+    auto e = ffilesystem::get_env(k);
     expect(e.has_value() >> fatal) << "Environment variable " << k << " not set";
     expect(eq(e.value(), v));
 
-    ffilesystem::setenv(k, ""); // unset
-    e = ffilesystem::getenv(k);
+    ffilesystem::set_env(k, ""); // unset
+    e = ffilesystem::get_env(k);
     expect(!e.has_value()) << "Environment variable " << k << " should be unset";
 
     std::string in_k = k + "-walkoff-end-of-buffer";
     std::string_view nonnull_k(in_k.data(), k.size());
     expect(nonnull_k.back() != '\0' >> fatal) << "Environment variable name should not be null-terminated in test";
 
-    expect(ffilesystem::setenv(nonnull_k, v) >> fatal) << "Failed to set environment variable with non-null-terminated name";
-    e = ffilesystem::getenv(k);
+    expect(ffilesystem::set_env(nonnull_k, v) >> fatal) << "Failed to set environment variable with non-null-terminated name";
+    e = ffilesystem::get_env(k);
     expect(e.has_value() >> fatal) << "Environment variable " << k << " not set with non-null-terminated name";
     expect(eq(e.value(), v)) << "Environment variable " << k << " has wrong value with non-null-terminated name";
   };
 
   "no_environment"_test = [] {
-    expect(ffilesystem::setenv("PATH", "") >> fatal);
-    expect(ffilesystem::setenv("HOME", "") >> fatal);
-    expect(ffilesystem::setenv("XDG_CONFIG_HOME", "") >> fatal);
-    expect(ffilesystem::setenv("TMPDIR", "") >> fatal);
+    expect(ffilesystem::set_env("PATH", "") >> fatal);
+    expect(ffilesystem::set_env("HOME", "") >> fatal);
+    expect(ffilesystem::set_env("XDG_CONFIG_HOME", "") >> fatal);
+    expect(ffilesystem::set_env("TMPDIR", "") >> fatal);
     if (ffilesystem::is_windows) {
-      expect(ffilesystem::setenv("USERPROFILE", "") >> fatal);
+      expect(ffilesystem::set_env("USERPROFILE", "") >> fatal);
     }
 
 #ifdef FFS_SYSTEM_DISABLED
@@ -108,13 +108,13 @@ int main() {
   };
 
   "no_home"_test = [] {
-    expect(ffilesystem::setenv("HOME", "") >> fatal);
-    expect(ffilesystem::setenv("XDG_CONFIG_HOME", "") >> fatal);
+    expect(ffilesystem::set_env("HOME", "") >> fatal);
+    expect(ffilesystem::set_env("XDG_CONFIG_HOME", "") >> fatal);
     if (ffilesystem::is_windows) {
-      expect(ffilesystem::setenv("USERPROFILE", "") >> fatal);
+      expect(ffilesystem::set_env("USERPROFILE", "") >> fatal);
     }
 
-    auto h = ffilesystem::getenv(ffilesystem::is_windows ? "USERPROFILE" : "HOME");
+    auto h = ffilesystem::get_env(ffilesystem::is_windows ? "USERPROFILE" : "HOME");
     expect(!h.has_value()) << "Environment variable HOME or USERPROFILE should not be set in test";
 
 #ifdef FFS_SYSTEM_DISABLED

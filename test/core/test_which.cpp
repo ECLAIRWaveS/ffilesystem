@@ -32,7 +32,7 @@ auto setup_which_no_path(which_ctx& ctx) {
   using namespace boost::ut;
 
   ctx.testExe = ffilesystem::is_windows ? "cmake.exe" : "ls";
-  expect(ffilesystem::setenv("PATH", "") >> fatal);
+  expect(ffilesystem::set_env("PATH", "") >> fatal);
 }
 
 } // namespace

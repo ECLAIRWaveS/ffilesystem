@@ -11,7 +11,7 @@ int main() {
 using namespace boost::ut;
 
 #ifndef FFS_SYSTEM_DISABLED
-bool const is_ci = ffilesystem::getenv("CI").value_or("") == "true";
+bool const is_ci = ffilesystem::get_env("CI").value_or("") == "true";
 #endif
 
 "Hostname"_test = [] {

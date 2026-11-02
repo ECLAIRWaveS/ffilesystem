@@ -8,7 +8,7 @@ namespace ffilesystem {
 
 std::string get_homedir()
 {
-  if (auto h = getenv(is_windows ? "USERPROFILE" : "HOME"); h && !h->empty())
+  if (auto h = get_env(is_windows ? "USERPROFILE" : "HOME"); h && !h->empty())
     return *h;
 
   return get_profile_dir();

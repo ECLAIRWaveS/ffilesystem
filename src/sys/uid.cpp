@@ -105,7 +105,7 @@ std::string get_terminal()
   }
 
 #else
-  if (auto t = getenv("TERM"); t)
+  if (auto t = get_env("TERM"); t)
     return *t;
 #endif
 

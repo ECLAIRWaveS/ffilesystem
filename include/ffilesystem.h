@@ -196,8 +196,8 @@ std::string expanduser(std::string_view);
 bool is_absolute(std::string_view);
 
 
-std::optional<std::string> getenv(std::string_view);
-bool setenv(std::string_view, std::string_view);
+std::optional<std::string> get_env(std::string_view);
+bool set_env(std::string_view, std::string_view);
 
 std::uintmax_t hard_link_count(std::string_view);
 std::uintmax_t file_size(std::string_view);

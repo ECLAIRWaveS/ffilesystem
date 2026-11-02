@@ -113,7 +113,7 @@ bool is_exe(std::string_view path)
     return false;
 
   std::string pathext;
-  if(auto e = getenv("PATHEXT"); e) {
+  if(auto e = get_env("PATHEXT"); e) {
     pathext = *e;
     ascii_lower(pathext);
   } else {

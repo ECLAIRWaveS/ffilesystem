@@ -9,7 +9,7 @@
 int main() {
 using namespace boost::ut;
 
-std::string cenv = ffilesystem::getenv("CI").value_or("");
+std::string cenv = ffilesystem::get_env("CI").value_or("");
 
 "owner_name"_test = [] {
   expect(!ffilesystem::get_owner_name(".").empty());

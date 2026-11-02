@@ -15,7 +15,7 @@
 
 namespace ffilesystem {
 
-std::optional<std::string> getenv(std::string_view name)
+std::optional<std::string> get_env(std::string_view name)
 {
   // convenience function to get environment variable without needing to check for nullptr
   // don't emit error because sometimes we just check if envvar is defined
@@ -29,7 +29,7 @@ std::optional<std::string> getenv(std::string_view name)
 }
 
 
-bool setenv(std::string_view name, std::string_view value)
+bool set_env(std::string_view name, std::string_view value)
 {
   // if value is empty, remove the variable from the environment
 

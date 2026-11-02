@@ -13,7 +13,7 @@ struct app_exec_ctx {
 bool setup(app_exec_ctx& ctx) {
   using namespace boost::ut;
 
-  std::string appdir{ffilesystem::getenv("LOCALAPPDATA").value_or("")};
+  std::string appdir{ffilesystem::get_env("LOCALAPPDATA").value_or("")};
 
   if (!appdir.empty()) {
     appdir += "\\Microsoft\\WindowsApps";

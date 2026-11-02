@@ -26,7 +26,7 @@ std::string fs_which_generic(std::string_view name, std::string_view path, const
 
   std::string paths;
   if(path.empty()){
-    if (auto p = ffilesystem::getenv("PATH"); p)
+    if (auto p = ffilesystem::get_env("PATH"); p)
       paths = *p;
   } else {
     paths = std::string(path);

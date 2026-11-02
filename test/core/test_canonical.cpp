@@ -39,7 +39,7 @@ auto make_ctx() {
 }
 
 auto system_drive() {
-  const auto value = ffilesystem::getenv("SystemDrive");
+  const auto value = ffilesystem::get_env("SystemDrive");
   if (!value || value->empty()) {
     return std::optional<std::string>{};
   }

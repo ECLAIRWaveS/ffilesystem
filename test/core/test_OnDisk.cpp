@@ -28,7 +28,7 @@ void setup(ondisk_ctx& ctx, std::string_view arg0) {
   expect(!ctx.cwd.empty() >> fatal);
 
   if (ffilesystem::is_windows) {
-    auto d = ffilesystem::getenv("SystemDrive");
+    auto d = ffilesystem::get_env("SystemDrive");
     expect(d.has_value() >> fatal) << "Failed to get SystemDrive";
     ctx.sys_drive = d.value();
   } else {
@@ -265,7 +265,7 @@ int main(int argc, char** argv) {
 #endif
   "short_long"_test = [] {
     // the path must exist
-    auto e = ffilesystem::getenv("PROGRAMFILES");
+    auto e = ffilesystem::get_env("PROGRAMFILES");
     expect(e.has_value() >> fatal) << "Failed to get PROGRAMFILES environment variable";
     std::string long_path = e.value();
     expect(!long_path.empty() >> fatal);

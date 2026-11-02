@@ -34,7 +34,7 @@ bool is_wsl()
   // fallbacks.
 #if defined(__linux__)
   auto env_is_set = [](std::string_view name) {
-    const auto value = getenv(name);
+    const auto value = get_env(name);
     return value && !value->empty();
   };
   if (env_is_set("WSL_DISTRO_NAME") || env_is_set("WSL_INTEROP"))

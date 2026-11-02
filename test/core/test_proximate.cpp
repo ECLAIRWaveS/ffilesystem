@@ -27,7 +27,7 @@ expect(eq(ffilesystem::proximate_to("a/b/c/d", "a/b/"), std::string{"../../"}));
 expect(eq(ffilesystem::proximate_to("./a/b", "./a/c"), std::string{"../c"}));
 
 if (ffilesystem::is_windows){
-auto e = ffilesystem::getenv("SYSTEMDRIVE");
+auto e = ffilesystem::get_env("SYSTEMDRIVE");
 expect(e.has_value() >> fatal) << "Failed to get SYSTEMDRIVE environment variable";
 std::string c = e.value();
 
